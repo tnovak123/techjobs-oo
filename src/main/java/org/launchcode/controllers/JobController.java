@@ -51,15 +51,12 @@ public class JobController {
         model.addAttribute("jobForm", jobForm);
 
         newJob.setName(jobForm.getName());
-        newJob.setEmployer(jobForm.getEmployers().get(jobForm.getEmployerId()));
-        newJob.setLocation(jobForm.getLocations().get(jobForm.getLocationId()));
-        newJob.setCoreCompetency(jobForm.getCoreCompetencies().get(jobForm.getCoreCompetencyId()));
-        newJob.setPositionType(jobForm.getPositionTypes().get(jobForm.getPositionTypeId()));
-
+        newJob.setEmployer(jobData.getEmployers().findById(jobForm.getEmployerId()));
+        newJob.setLocation(jobData.getLocations().findById(jobForm.getLocationId()));
+        newJob.setCoreCompetency(jobData.getCoreCompetencies().findById(jobForm.getCoreCompetencyId()));
+        newJob.setPositionType(jobData.getPositionTypes().findById(jobForm.getPositionTypeId()));
 
         jobData.add(newJob);
-
-//        model.addAttribute("job", newJob);
 
         return "redirect:?id=" + newJob.getId();
 
